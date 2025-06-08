@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Bulanbu Baby Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f1729 50%, #1e40af 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Moon and Stars Background */
+        .moon {
+            position: fixed;
+            top: 15%;
+            right: 8%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
+            z-index: 1;
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 40% 70%, #fcd34d, transparent),
+                radial-gradient(1px 1px at 90% 40%, #fef3c7, transparent),
+                radial-gradient(1px 1px at 60% 10%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 80% 80%, #fcd34d, transparent),
+                radial-gradient(1px 1px at 15% 85%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 70% 20%, #fcd34d, transparent);
+            animation: twinkle 3s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.3); }
+            100% { box-shadow: 0 0 70px rgba(245, 158, 11, 0.5); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-home {
+            background: rgba(30, 64, 175, 0.3);
+            padding: 14px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-home:hover {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: #fbbf24;
+            transform: translateY(-2px);
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            gap: 40px;
+        }
+
+        .content-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #fbbf24;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            text-align: justify;
+        }
+
+        /* Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .story-item {
+            background: rgba(30, 64, 175, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .story-year {
+            font-size: 1.5rem;
+            color: #fbbf24;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .story-text {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .value-card {
+            background: rgba(30, 64, 175, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: #fbbf24;
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fbbf24;
+        }
+
+        .value-title {
+            font-size: 1.3rem;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .value-description {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background: rgba(30, 64, 175, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            border-color: #fbbf24;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #1e3a8a;
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            color: #fbbf24;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .member-role {
+            color: #cbd5e1;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .member-description {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(30, 64, 175, 0.1));
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            margin-top: 40px;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            color: #cbd5e1;
+            font-size: 1rem;
+        }
+
+        .contact-item strong {
+            color: #fbbf24;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .story-grid {
+                gap: 30px;
+            }
+            
+            .nav-home {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-home {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .moon {
+                width: 80px;
+                height: 80px;
+                top: 10%;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .nav-home {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="moon"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">🌙 Bulanbu Baby Store</div>
+            <a href="dashboard.php" class="nav-home">🏠 Kembali ke Beranda</a>
+        </header>
+
+        <div class="page-title">
+            <h1>Tentang Kami</h1>
+            <p>Mengenal Lebih Dekat Bulanbu Baby Store</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Misi & Visi -->
+            <div class="content-section">
+                <h2 class="section-title">Misi & Visi Kami</h2>
+                <div class="section-content">
+                    <p><strong>Visi Kami:</strong> Menjadi toko perlengkapan bayi terpercaya yang menghadirkan produk berkualitas tinggi untuk mendukung tumbuh kembang optimal setiap anak di Indonesia.</p>
+                    <br>
+                    <p><strong>Misi Kami:</strong> Menyediakan perlengkapan bayi terlengkap dengan standar kualitas internasional, memberikan pelayanan terbaik kepada setiap keluarga, dan menjadi mitra terpercaya dalam perjalanan mengasuh anak dengan penuh cinta dan perhatian.</p>
+                </div>
+            </div>
+
+            <!-- Cerita Kami -->
+            <div class="content-section">
+                <h2 class="section-title">Cerita Kami</h2>
+                <div class="section-content">
+                    <p>Bulanbu Baby Store lahir dari pengalaman pribadi sebagai orang tua yang memahami betapa pentingnya memilih perlengkapan bayi yang aman, berkualitas, dan terpercaya. Kami memulai perjalanan ini dengan tekad untuk membantu para orang tua menemukan produk terbaik untuk buah hati mereka.</p>
+                </div>
+                
+                <div class="story-grid">
+                    <div class="story-item">
+                        <div class="story-year">2020</div>
+                        <div class="story-text">
+                            Memulai usaha kecil dari rumah dengan menjual baju bayi berkualitas tinggi kepada keluarga dan teman-teman terdekat.
+                        </div>
+                    </div>
+                    <div class="story-item">
+                        <div class="story-year">2021</div>
+                        <div class="story-text">
+                            Memperluas katalog produk dengan menambahkan mainan edukatif dan popok bayi premium dari berbagai merk terpercaya.
+                        </div>
+                    </div>
+                    <div class="story-item">
+                        <div class="story-year">2022</div>
+                        <div class="story-text">
+                            Meluncurkan toko online pertama dan menambahkan kategori makanan bayi untuk melengkapi kebutuhan nutrisi si kecil.
+                        </div>
+                    </div>
+                    <div class="story-item">
+                        <div class="story-year">2025</div>
+                        <div class="story-text">
+                            Kini telah melayani ribuan keluarga di seluruh Indonesia dengan komitmen kualitas dan pelayanan terbaik.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nilai-Nilai Kami -->
+            <div class="content-section">
+                <h2 class="section-title">Nilai-Nilai Kami</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🛡️</div>
+                        <h3 class="value-title">Keamanan</h3>
+                        <p class="value-description">
+                            Setiap produk yang kami jual telah melalui seleksi ketat untuk memastikan keamanan dan kenyamanan bayi Anda.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">⭐</div>
+                        <h3 class="value-title">Kualitas</h3>
+                        <p class="value-description">
+                            Kami hanya menyediakan produk dari merk terpercaya dengan standar kualitas internasional.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">❤️</div>
+                        <h3 class="value-title">Kepercayaan</h3>
+                        <p class="value-description">
+                            Membangun hubungan jangka panjang dengan pelanggan berdasarkan kepercayaan dan transparansi.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3 class="value-title">Inovasi</h3>
+                        <p class="value-description">
+                            Selalu menghadirkan produk-produk terbaru dan inovatif untuk mendukung perkembangan anak.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tim Kami -->
+            <div class="content-section">
+                <h2 class="section-title">Tim Kami</h2>
+                <div class="section-content">
+                    <p>Tim Bulanbu Baby Store terdiri dari para profesional berpengalaman yang memiliki dedikasi tinggi dalam melayani kebutuhan keluarga Indonesia.</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">👩‍💼</div>
+                        <div class="member-name">Donna F S</div>
+                        <div class="member-role">Founder & CEO</div>
+                        <div class="member-description">
+                            Ibu dari dua anak yang berpengalaman 8 tahun di industri retail produk bayi dan anak.
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👨‍💻</div>
+                        <div class="member-name">Angelica</div>
+                        <div class="member-role">Head of Operations</div>
+                        <div class="member-description">
+                            Ahli dalam manajemen supply chain dengan fokus pada kualitas dan efisiensi distribusi.
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👩‍⚕️</div>
+                        <div class="member-name">Dr. Lisa Putri</div>
+                        <div class="member-role">Product Safety Advisor</div>
+                        <div class="member-description">
+                            Dokter anak bersertifikat yang memastikan setiap produk aman untuk bayi dan anak-anak.
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👩‍💼</div>
+                        <div class="member-name">Donanda Maulidyawati Suwondo</div>
+                        <div class="member-role">Web Development</div>
+                        <div class="member-description">
+                            Berpengalaman dalam mengembangkan website.
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Komitmen Kami -->
+            <div class="content-section">
+                <h2 class="section-title">Komitmen Kami</h2>
+                <div class="section-content">
+                    <p>Bulanbu Baby Store berkomitmen untuk terus berinovasi dan memberikan yang terbaik bagi keluarga Indonesia. Kami percaya bahwa setiap anak berhak mendapatkan produk berkualitas tinggi yang mendukung tumbuh kembang mereka secara optimal.</p>
+                    <br>
+                    <p>Dengan dukungan tim yang berpengalaman dan jaringan supplier terpercaya, kami siap menjadi mitra terbaik Anda dalam perjalanan mengasuh anak dengan penuh cinta dan perhatian.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <h2 class="contact-title">Hubungi Kami</h2>
+            <p style="color: #cbd5e1; margin-bottom: 20px;">
+                Kami siap membantu Anda menemukan produk terbaik untuk si kecil
+            </p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <strong>📧 Email:</strong><br>
+                    info@lunababystore.com
+                </div>
+                <div class="contact-item">
+                    <strong>WhatsApp:</strong><br>
+                    +62 812-3456-7890
+                </div>
+                <div class="contact-item">
+                    <strong>Alamat:</strong><br>
+                     Jl. Soekarno Hatta No. 88<br>
+                        Lowokwaru, Malang<br>
+                        Jawa Timur 65141
+                </div>
+                <div class="contact-item">
+                    <strong>🕒 Jam Operasional:</strong><br>
+                    Senin - Sabtu: 08:00 - 20:00
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Parallax effect for moon
+        window.addEventListener('scroll', () => {
+            const moon = document.querySelector('.moon');
+            const scrolled = window.pageYOffset;
+            moon.style.transform = `translateY(${scrolled * 0.3}px)`;
+        });
+
+        // Smooth entrance animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
