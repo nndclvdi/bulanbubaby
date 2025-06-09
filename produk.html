@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Produk - Bulanbu Baby Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f1729 50%, #1e40af 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Moon and Stars Background */
+     .moon {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(245, 158, 11, 0.3);
+    z-index: 0; /* Turunkan z-index agar di belakang */
+    animation: moonGlow 4s ease-in-out infinite alternate;
+}
+
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 40% 70%, #fcd34d, transparent),
+                radial-gradient(1px 1px at 90% 40%, #fef3c7, transparent),
+                radial-gradient(1px 1px at 60% 10%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 80% 80%, #fcd34d, transparent);
+            animation: twinkle 3s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(245, 158, 11, 0.3); }
+            100% { box-shadow: 0 0 80px rgba(245, 158, 11, 0.5); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+     .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .navbar {
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
+        }
+
+        .navbar-brand {
+            font-size: 1rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
+            font-size: 0.9rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }        
+
+        .nav-item {
+            background: rgba(64, 108, 252, 0.3);
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 600;
+            border: 2px solid rgba(137, 177, 251, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: #fbbf24;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(8, 70, 196, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .nav-item:hover::before {
+            animation: shine 0.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
+        }
+
+
+        .page-header {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            color: #fbbf24;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .filter-select, .filter-input {
+            background: rgba(30, 64, 175, 0.3);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .filter-select:focus, .filter-input:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+        }
+
+        .filter-button {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e3a8a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: rgba(30, 64, 175, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.1);
+            border-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .product-image i {
+            font-size: 3rem;
+            color: #fbbf24;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            color: #fbbf24;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            color: #22c55e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .product-detail {
+            display: flex;
+            justify-content: space-between;
+            color: #cbd5e1;
+        }
+
+        .product-detail-label {
+            color: #94a3b8;
+        }
+
+        .product-description {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .product-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .contact-button {
+            width: 100%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #fbbf24;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 50px;
+            color: #cbd5e1;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(251, 191, 36, 0.2);
+            margin-top: 50px;
+        }
+
+        .footer-text {
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="moon"></div>
+    
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+            <a class="navbar-brand" href="dashboard.php"><img src="image/logo.png" alt="Logo Bayi" width="50" height="50"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.php">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="produk.html">Produk</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="tentangkami.html">Tentang Kami</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="kontak.html">Kontak</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="blog.html">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ulasan.html">Ulasan Kami</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">🌙 Katalog Produk Kami</h1>
+            <p class="page-subtitle">Koleksi Lengkap Perlengkapan Bayi Berkualitas</p>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+           <div class="filter-group">
+  <label class="filter-label">Kategori</label>
+  <select id="filterKategori" class="filter-select">
+    <option value="">Semua Kategori</option>
+    <option value="baju_bayi">Baju Bayi</option>
+    <option value="makanan_bayi">Makanan Bayi</option>
+    <option value="mainan_bayi">Mainan Bayi</option>
+    <option value="popok_bayi">Popok Bayi</option>
+  </select>
+</div>
+
+                
+                <div class="filter-group">
+                    <label class="filter-label">Rentang Usia</label>
+                    <select id="filterUsia" class="filter-select">
+                        <option value="">Semua Usia</option>
+                        <option value="0-6 bulan">0-6 bulan</option>
+                        <option value="3-6 bulan">3-6 bulan</option>
+                        <option value="6-12 bulan">6-12 bulan</option>
+                        <option value="9-12 bulan">9-12 bulan</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Pencarian</label>
+                    <input type="text" id="searchInput" class="filter-input" placeholder="Cari produk...">
+                </div>
+                
+                <div class="filter-group" style="justify-content: flex-end;">
+                    <button onclick="applyFilters()" class="filter-button">
+                        <i class="fas fa-search"></i> Filter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productsContainer">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p>Memuat produk...</p>
+            </div>
+        </div>
+
+        <footer>
+            <p class="footer-text">© 2025 Bulanbu Baby Store - Perlengkapan Bayi Terpercaya</p>
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                <a href="https://www.instagram.com/bulanbu.baby?utm_source=ig_web_button_share_sheet&igsh=ZGp4YWxraTA5dG4x" target="_blank" style="color: #fbbf24; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 1rem;">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@bulanbu.baby?_t=8rHGLh6KYiu&_r=1" target="_blank" style="color: #fbbf24; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 1rem;">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6289528513034&text=Hola%20Bubun%21%20mau%20minta%20informasi%20dong.." target="_blank" style="color: #fbbf24; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 1rem;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Database connection and product management
+        let allProducts = [];
+        let filteredProducts = [];
+
+        // Simulate database connection
+    async function connectToDatabase() {
+        try {
+            const response = await fetch('get_products.php');
+            if (!response.ok) {
+                throw new Error('Gagal mengambil data produk');
+            }
+            const products = await response.json();
+            return products;
+        } catch (error) {
+            console.error('Kesalahan koneksi database:', error);
+            return [];
+        }
+    }
+
+
+        // Format currency to Indonesian Rupiah
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Create product card HTML
+        function createProductCard(product) {
+    let namaProduk = product.nama_baju || product.nama_makanan || product.nama_mainan || product.nama_popok || "Produk";
+    let deskripsi = product.deskripsi || "-";
+    let harga = product.harga || 0;
+    let ukuran = product.ukuran || "-";
+    let warna = product.warna || "-";
+    let usia = product.usia_cocok || "-";
+    let stok = product.stok || "-";
+    let merk = product.merk || "-";
+    let bahan = product.bahan || "-";
+
+    const whatsappMessage = encodeURIComponent(
+        `Halo! Saya tertarik dengan produk:\n\n` +
+        `Nama: ${namaProduk}\n` +
+        `Harga: ${formatCurrency(harga)}\n` +
+        `Ukuran: ${ukuran}\n` +
+        `Warna: ${warna}\n\n` +
+        `Apakah produk ini masih tersedia?`
+    );
+
+    return `
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas fa-baby"></i>
+            </div>
+            <h3 class="product-name">${namaProduk}</h3>
+            <div class="product-price">${formatCurrency(harga)}</div>
+            
+            <div class="product-details">
+                <div class="product-detail">
+                    <span class="product-detail-label">Ukuran:</span>
+                    <span>${ukuran}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Warna:</span>
+                    <span>${warna}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Usia:</span>
+                    <span>${usia}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Stok:</span>
+                    <span>${stok}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Merk:</span>
+                    <span>${merk}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Bahan:</span>
+                    <span>${bahan}</span>
+                </div>
+            </div>
+            
+            <div class="product-badges">
+                <span class="badge">${ukuran}</span>
+                <span class="badge">${warna}</span>
+                <span class="badge">${usia}</span>
+            </div>
+            
+            <p class="product-description">${deskripsi}</p>
+            
+            <a href="https://api.whatsapp.com/send?phone=6289528513034&text=${whatsappMessage}" 
+               target="_blank" class="contact-button">
+                <i class="fab fa-whatsapp"></i> Hubungi Kami
+            </a>
+        </div>
+    `;
+}
+        // Render products to the grid
+        function renderProducts(products) {
+            const container = document.getElementById('productsContainer');
+            
+            if (products.length === 0) {
+                container.innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-search fa-3x"></i>
+                        <h3>Tidak ada produk ditemukan</h3>
+                        <p>Coba ubah filter pencarian Anda</p>
+                    </div>                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `<div class="products-grid">${products.map(createProductCard).join('')}</div>`;
+        }
+
+        // Apply filters based on user input
+       function applyFilters() {
+    const kategori = document.getElementById('filterKategori').value;
+    const ukuran = document.getElementById('filterUkuran').value;
+    const usia = document.getElementById('filterUsia').value;
+    const warna = document.getElementById('filterWarna').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    filteredProducts = allProducts.filter(product => {
+        const matchKategori = kategori === '' || product.kategori === kategori;
+        const matchUkuran = ukuran === '' || product.ukuran === ukuran;
+        const matchUsia = usia === '' || product.usia_cocok === usia;
+        const matchWarna = warna === '' || (product.warna && product.warna.toLowerCase() === warna.toLowerCase());
+        const matchSearch =
+            (product.nama_baju?.toLowerCase().includes(search) ||
+             product.nama_makanan?.toLowerCase().includes(search) ||
+             product.nama_mainan?.toLowerCase().includes(search) ||
+             product.nama_popok?.toLowerCase().includes(search) ||
+             product.deskripsi?.toLowerCase().includes(search));
+
+        return matchKategori && matchUkuran && matchUsia && matchWarna && matchSearch;
+    });
+
+    renderProducts(filteredProducts);
+}
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            allProducts = await connectToDatabase();
+            filteredProducts = allProducts;
+            renderProducts(allProducts);
+        });
+    </script>
+     <script>
+        // Optimized interaction effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove preventDefault from navbar links to allow normal navigation
+            // Only apply to category menu items, not main navbar
+            const categoryNavItems = document.querySelectorAll('.nav-menu .nav-item');
+            categoryNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Only prevent default for category items that don't have proper links
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Optimized parallax effect with throttling
+            let ticking = false;
+            const moon = document.querySelector('.moon');
+            
+            function updateMoon() {
+                const scrolled = window.pageYOffset;
+                moon.style.transform = `translateY(${scrolled * 0.5}px)`;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateMoon);
+                    ticking = true;
+                }
+            });
+
+            // Optimized hover effects using CSS classes instead of inline styles
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('card-hover');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('card-hover');
+                });
+            });
+
+            // Add loading indicator for navigation
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (this.getAttribute('href') !== '#' && !this.getAttribute('href').startsWith('http')) {
+                        // Show loading state
+                        this.style.opacity = '0.7';
+                        this.innerHTML += ' <span class="spinner-border spinner-border-sm ms-1" role="status"></span>';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

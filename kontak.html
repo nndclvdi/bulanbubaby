@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Kontak - Bulanbu Baby Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f1729 50%, #1e40af 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Moon and Stars Background */
+        .moon {
+            position: fixed;
+            top: 10%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.3);
+            z-index: 1;
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 40% 70%, #fcd34d, transparent),
+                radial-gradient(1px 1px at 90% 40%, #fef3c7, transparent),
+                radial-gradient(1px 1px at 60% 10%, #fbbf24, transparent),
+                radial-gradient(2px 2px at 80% 80%, #fcd34d, transparent);
+            animation: twinkle 3s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(245, 158, 11, 0.3); }
+            100% { box-shadow: 0 0 80px rgba(245, 158, 11, 0.5); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .navbar {
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
+        }
+
+        .navbar-brand {
+            font-size: 1rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
+            font-size: 0.9rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }        
+
+        .nav-item {
+            background: rgba(64, 108, 252, 0.3);
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 600;
+            border: 2px solid rgba(137, 177, 251, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: #fbbf24;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(8, 70, 196, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .nav-item:hover::before {
+            animation: shine 0.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .contact-info-card {
+            background: rgba(30, 64, 175, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.1);
+            border-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+
+        .contact-title {
+            font-size: 1.3rem;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-description {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .form-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(15px);
+            margin-bottom: 40px;
+        }
+
+        .form-control, .form-select {
+            background: rgba(30, 64, 175, 0.1);
+            border: 2px solid rgba(137, 177, 251, 0.3);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(30, 64, 175, 0.2);
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 0.25rem rgba(251, 191, 36, 0.15);
+            color: #e2e8f0;
+        }
+
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-select option {
+            background: #1e3a8a;
+            color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border: none;
+            color: #1e3a8a;
+            padding: 12px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+            color: #1e3a8a;
+        }
+
+        .map-container {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(15px);
+            margin-bottom: 40px;
+        }
+
+        .accordion-item {
+            background: rgba(30, 64, 175, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background: rgba(15, 23, 42, 0.5);
+            color: #e2e8f0;
+            border: none;
+            font-weight: 600;
+            padding: 20px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .accordion-body {
+            background: rgba(15, 23, 42, 0.3);
+            color: #cbd5e1;
+            padding: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(251, 191, 36, 0.2);
+            margin-top: 50px;
+        }
+
+        .footer-text {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #fbbf24;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .form-check-input:checked {
+            background-color: #fbbf24;
+            border-color: #fbbf24;
+        }
+
+        .form-check-input:focus {
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 0.25rem rgba(251, 191, 36, 0.15);
+        }
+
+        .form-check-label {
+            color: #cbd5e1;
+        }
+
+        .form-check-label a {
+            color: #fbbf24;
+            text-decoration: none;
+        }
+
+        .form-check-label a:hover {
+            color: #f59e0b;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .form-card {
+                padding: 25px;
+            }
+            
+            .map-container {
+                padding: 20px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+            
+            .nav-item {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="moon"></div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.php"><img src="image/logo.png" alt="Logo Bayi" width="50" height="50"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.php">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="produk.html">Produk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tentangkami.html">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="kontak.html">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ulasan.html">Ulasan Kami</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="logo">🌙 Hubungi Kami</div>
+            <div class="tagline">Kami siap membantu Anda memberikan yang terbaik untuk si kecil</div>
+        </header>
+
+        <!-- Contact Info -->
+        <section class="row mb-5">
+            <div class="col-md-4">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4 class="contact-title">Alamat Toko</h4>
+                    <div class="contact-description">
+                        Jl. Soekarno Hatta No. 88<br>
+                        Lowokwaru, Malang<br>
+                        Jawa Timur 65141
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h4 class="contact-title">Customer Service</h4>
+                    <div class="contact-description">
+                        +62 895 2851 3034<br>
+                        <small>Senin - Sabtu: 08:00 - 20:00</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4 class="contact-title">Email & Social Media</h4>
+                    <div class="contact-description">
+                        info@bulanbubaby.com<br>
+                        <small>Follow kami di Instagram & TikTok<br>@bulanbu.baby</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="form-card">
+            <div class="text-center mb-4">
+                <h2 style="color: #fbbf24; margin-bottom: 15px; font-size: 2rem;">
+                    <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
+                    Kirim Pesan
+                </h2>
+                <p style="color: #cbd5e1;">Ada pertanyaan tentang produk bayi? Kami siap membantu!</p>
+            </div>
+            <form id="contactForm" action="submit_contact.php" method="POST">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">
+                            <i class="fas fa-user"></i>
+                            Nama Lengkap <span style="color: #ef4444;">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            Email <span style="color: #ef4444;">*</span>
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="phone" class="form-label">
+                            <i class="fas fa-phone"></i>
+                            Nomor WhatsApp
+                        </label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+62 812 3456 7890">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="subject" class="form-label">
+                            <i class="fas fa-tag"></i>
+                            Kategori Pertanyaan <span style="color: #ef4444;">*</span>
+                        </label>
+                        <select class="form-select" id="subject" name="subject" required>
+                            <option value="" selected disabled>Pilih Kategori</option>
+                            <option value="Produk Bayi">Pertanyaan Produk Bayi</option>
+                            <option value="Pemesanan">Pemesanan & Pembayaran</option>
+                            <option value="Pengiriman">Pengiriman & Retur</option>
+                            <option value="Konsultasi">Konsultasi Produk</option>
+                            <option value="Grosir">Pembelian Grosir</option>
+                            <option value="Komplain">Komplain Produk</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="babyAge" class="form-label">
+                            <i class="fas fa-birthday-cake"></i>
+                            Usia Bayi (opsional)
+                        </label>
+                        <select class="form-select" id="babyAge" name="babyAge">
+                            <option value="" selected>Pilih Usia Bayi</option>
+                            <option value="0-3 bulan">0-3 bulan</option>
+                            <option value="3-6 bulan">3-6 bulan</option>
+                            <option value="6-12 bulan">6-12 bulan</option>
+                            <option value="1-2 tahun">1-2 tahun</option>
+                            <option value="2+ tahun">2+ tahun</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="urgency" class="form-label">
+                            <i class="fas fa-clock"></i>
+                            Tingkat Urgensi
+                        </label>
+                        <select class="form-select" id="urgency" name="urgency">
+                            <option value="Normal" selected>Normal</option>
+                            <option value="Mendesak">Mendesak</option>
+                            <option value="Sangat Mendesak">Sangat Mendesak</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">
+                        <i class="fas fa-comment"></i>
+                        Pesan <span style="color: #ef4444;">*</span>
+                    </label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Ceritakan kepada kami kebutuhan bayi Anda..."></textarea>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            Saya setuju dengan <a href="#">kebijakan privasi</a> dan bersedia menerima informasi produk terbaru
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="newsletter">
+                        <label class="form-check-label" for="newsletter">
+                            Saya ingin berlangganan newsletter tips perawatan bayi
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Kirim Pesan
+                    </button>
+                </div>
+            </form>
+            <form id="contactForm" action="submit_contact.php" method="POST">
+</form>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-container">
+            <h2 class="text-center mb-4" style="color: #fbbf24;">
+                <i class="fas fa-map-marked-alt me-2"></i>
+                Lokasi Toko Kami
+            </h2>
+            <div class="ratio ratio-16x9 mb-3">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.2088894978895!2d112.61466431477494!3d-7.966620194280184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629c7b8d4b35d%3A0x8e3b0b0d5e5e5e5e!2sJl.%20Soekarno%20Hatta%2C%20Lowokwaru%2C%20Kota%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sen!2sid!4v1234567890"
+                    style="border: 0; border-radius: 15px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="text-center">
+                <p style="color: #fbbf24; margin-bottom: 5px;"><strong>Bulanbu Baby Store</strong> - Perlengkapan Bayi Terlengkap di Malang</p>
+                <small style="color: #cbd5e1;">Mudah dijangkau dengan transportasi umum dan parkir luas tersedia</small>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-5" style="color: #fbbf24;">
+                <i class="fas fa-question-circle me-2"></i>
+                Pertanyaan yang Sering Diajukan
+            </h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            Bagaimana cara memesan produk bayi?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Anda dapat memesan melalui WhatsApp di +62 895 2851 3034, Instagram @bulanbu.baby, atau datang langsung ke toko kami di Malang. Kami juga menyediakan konsultasi gratis untuk membantu memilih produk yang tepat sesuai usia dan kebutuhan bayi Anda.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            Apakah semua produk aman untuk bayi?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Ya, semua produk kami telah tersertifikasi SNI dan bebas BPA. Kami hanya menjual produk dari brand terpercaya yang telah teruji keamanannya untuk bayi dan anak-anak. Kualitas dan keamanan produk adalah prioritas utama kami.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                            <i class="fas fa-truck me-2"></i>
+                            Berapa lama waktu pengiriman?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Untuk wilayah Malang dan sekitarnya: 1 hari. Luar kota Malang: 2-3 hari. Kami menggunakan packaging khusus untuk produk bayi agar tetap aman selama pengiriman. Same day delivery tersedia untuk wilayah tertentu di Malang.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                            <i class="fas fa-exchange-alt me-2"></i>
+                            Bagaimana kebijakan retur dan tukar produk?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Kami menerima retur dalam 7 hari untuk produk yang tidak sesuai atau rusak. Produk harus dalam kondisi asli dan belum digunakan. Untuk produk yang sudah dibuka karena alergi bayi, kami berikan tukar dengan produk lain setelah konsultasi dengan tim kami.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                            <i class="fas fa-credit-card me-2"></i>
+                            Apa saja metode pembayaran yang tersedia?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Kami menerima transfer bank, e-wallet (OVO, GoPay, DANA, ShopeePay), dan COD untuk wilayah Malang. Tersedia juga cicilan 0% untuk pembelian tertentu melalui aplikasi e-commerce partner kami.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">© 2025 Bulanbu Baby Store - Perlengkapan Bayi Terpercaya di Malang</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/bulanbu.baby?utm_source=ig_web_button_share_sheet&igsh=ZGp4YWxraTA5dG4x" target="_blank">
+                    <img src="image/instagram.jpg" alt="Instagram" width="24" height="24">Instagram
+                </a>
+                <a href="https://www.tiktok.com/@bulanbu.baby?_t=8rHGLh6KYiu&_r=1" target="_blank">
+                    <img src="image/tiktok.jpg" alt="TikTok" width="24" height="24">TikTok
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6289528513034&text=Hola%20Bubun%21%20mau%20minta%20informasi%20dong.." target="_blank">
+                    <img src="image/whatsapp.jpg" alt="WhatsApp" width="24" height="24">WhatsApp
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+
+     <script>
+        // Optimized interaction effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove preventDefault from navbar links to allow normal navigation
+            // Only apply to category menu items, not main navbar
+            const categoryNavItems = document.querySelectorAll('.nav-menu .nav-item');
+            categoryNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Only prevent default for category items that don't have proper links
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Optimized parallax effect with throttling
+            let ticking = false;
+            const moon = document.querySelector('.moon');
+            
+            function updateMoon() {
+                const scrolled = window.pageYOffset;
+                moon.style.transform = `translateY(${scrolled * 0.5}px)`;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateMoon);
+                    ticking = true;
+                }
+            });
+
+            // Optimized hover effects using CSS classes instead of inline styles
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('card-hover');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('card-hover');
+                });
+            });
+
+            // Add loading indicator for navigation
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (this.getAttribute('href') !== '#' && !this.getAttribute('href').startsWith('http')) {
+                        // Show loading state
+                        this.style.opacity = '0.7';
+                        this.innerHTML += ' <span class="spinner-border spinner-border-sm ms-1" role="status"></span>';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
